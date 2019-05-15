@@ -1,0 +1,7 @@
+name = "seizure_model"
+uuid = "e25913a8-7660-11e9-2f7d-e702a79b2b11"
+authors = ["Graham Smith <grahamas@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+Simulation73 = "310cc8c8-1ffe-11e9-399c-c5a008d6bdcc"
