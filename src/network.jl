@@ -1,7 +1,7 @@
-@with_kw struct HHNetwork{T}
+@with_kw struct HHNetwork{T} <: AbstractModel{T,D,2}
     num_neurons::Int
     proportion_E::Float64
-    space::AbstractSpace
+    space::AbstractSpace{T,D}
     stimulus::AbstractArray{<:AbstractStimulus{T}}
     synapse_AMPA::AMPASynapse{T}
     synapse_GABA::GABASynapse{T}
@@ -9,17 +9,39 @@
     neuron_I::HHNeuron{T}
 end
 
-# State[1] is neuronE
+function initial_value(network::HHNetwork)
+    ArrayPartition(
+        NeuronData(
+            ArrayPartition(
+                [zero(network.space) for i in 1:8]... # [V, n, Vf, Vs, gAMPA, zA, gGABA, gG]
+            ), # Differential data
+            zero(network.space), # last_spike_time
+            network.neuron_E.dt_refractory,
+            network.neuron_E.threshold
+        ),
+        NeuronData(
+            ArrayPartition(
+                [zero(network.space) for i in 1:8]... # [V, n, Vf, Vs, gAMPA, zA, gGABA, gG]
+            ), # Differential data
+            zero(network.space), # last_spike_time
+            network.neuron_I.dt_refractory,
+            network.neuron_I.threshold
+        )
+    )
+end
+
+# FIXME collapse these functions into one with the cardinal difference (V_s vs V) dispatched
+# State.last_spike_time is array containing last spike time
+# State.x[1] is neuronE
 # State[1][1] is V_E
 # State[1][2] is n_E
 # State[1][3] = V_f (high pass)
 # State[1][4] = V_s (low pass)
-# State[1][5] is AMPA synapses
-# State[1][5][1] is g_AMPA
-# State[1][5][2] is z_AMPA
+# State[1][5] is g_AMPA
+# State[1][6] is z_AMPA
+# State[1][7] is g_GABA
+# State[1][8] is z_GABA
 # State[2] is neuronI
-# ..
-# State[2][3] is GABA synapses
 # ..
 function make_system_mutator(network::HHNetwork)
     stimulus_mutator! = make_mutator(network.stimulus, network.space)

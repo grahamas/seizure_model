@@ -15,6 +15,15 @@
     τ_n::T
     τ_V_f::T
     τ_V_s::T
+    dt_refractory::T,
+    threshold::T
+end
+
+mutable struct NeuronData{T,N} <: DEDataArray{T,N}
+    x::ArrayPartition{T,N}
+    last_spike_time::Array{T,N}
+    dt_refractory::T
+    threshold::T
 end
 
 function Θ(V, V_half, K)

@@ -44,15 +44,13 @@ end
 # State[1][8] is z_GABA
 # State[2] is neuronI
 # ..
-# State[2][3] is GABA synapses
-# ..
 function detect_spikes(state, history, p, t, dt, presynapse_ix)
     Vf_before = history(p, t-dt).x[presynapse_ix].x.x[3]
     Vf_at = history(p, t).x[presynapse_ix].x.x[3]
     Vf_after = history(p, t+dt).x[presynapse_ix].x.x[3]
 
     last_spike_time = history(p,t).x[presynapse_ix].last_spike_time
-    dt_refractory = history(p,t).x[presynapse_ix].dt_absolute_refractory
+    dt_refractory = history(p,t).x[presynapse_ix].dt_refractory
     threshold = history(p,t).x[presynapse_ix].threshold
 
     @. spikes_bitarr = ((Vf_at > threshold)
