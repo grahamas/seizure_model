@@ -11,22 +11,8 @@ end
 
 function initial_value(network::HHNetwork)
     ArrayPartition(
-        NeuronData(
-            ArrayPartition(
-                [zero(network.space) for i in 1:8]... # [V, n, Vf, Vs, gAMPA, zA, gGABA, gG]
-            ), # Differential data
-            zero(network.space), # last_spike_time
-            network.neuron_E.dt_refractory,
-            network.neuron_E.threshold
-        ),
-        NeuronData(
-            ArrayPartition(
-                [zero(network.space) for i in 1:8]... # [V, n, Vf, Vs, gAMPA, zA, gGABA, gG]
-            ), # Differential data
-            zero(network.space), # last_spike_time
-            network.neuron_I.dt_refractory,
-            network.neuron_I.threshold
-        )
+        initial_value(network.neuron_E, network.space),
+        initial_value(network.neuron_I, network.space)
     )
 end
 

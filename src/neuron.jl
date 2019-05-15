@@ -26,6 +26,15 @@ mutable struct NeuronData{T,N} <: DEDataArray{T,N}
     threshold::T
 end
 
+initial_value(neuron::HHNeuron, space::AbstractSpace) = NeuronData(
+    ArrayPartition(
+        [zero(space) for i in 1:8]... # [V, n, Vf, Vs, gAMPA, zA, gGABA, gG]
+    ), # Differential data
+    zero(space), # last_spike_time
+    neuron.dt_refractory,
+    neuron.threshold
+)
+
 function Θ(V, V_half, K)
     1 / (1 + exp((V_half - V) / K))
 end
