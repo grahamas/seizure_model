@@ -1,12 +1,5 @@
 module seizure_model
 
-using Simulation73
-using RecursiveArrayTools
-using Parameters
-
-include("stimulus.jl")
-include("connectivity.jl")
-include("neuron.jl")
-include("network.jl")
+using Simulation73, HodgkinHuxleyModel
 
 end # module

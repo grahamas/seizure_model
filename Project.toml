@@ -4,4 +4,5 @@ authors = ["Graham Smith <grahamas@gmail.com>"]
 version = "0.1.0"
 
 [deps]
+HodgkinHuxleyModel = "e104df48-77ee-11e9-390e-8f7d660e0146"
 Simulation73 = "310cc8c8-1ffe-11e9-399c-c5a008d6bdcc"
