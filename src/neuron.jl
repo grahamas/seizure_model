@@ -17,6 +17,7 @@
     τ_V_s::T
     dt_refractory::T,
     threshold::T
+    N_per_point::T=1
 end
 
 mutable struct NeuronData{T,N} <: DEDataArray{T,N}
@@ -26,11 +27,14 @@ mutable struct NeuronData{T,N} <: DEDataArray{T,N}
     threshold::T
 end
 
+function zero(neuron::HHNeuron{T}, space::AbstractSpace{T,D}) where {T,D}
+    cat([zero(space) for i in 1:neuron.N_per_point]..., dims=D+1)
+end
 initial_value(neuron::HHNeuron, space::AbstractSpace) = NeuronData(
     ArrayPartition(
-        [zero(space) for i in 1:8]... # [V, n, Vf, Vs, gAMPA, zA, gGABA, gG]
+        [zero(neuron, space) for i in 1:8]... # [V, n, Vf, Vs, gAMPA, zA, gGABA, gG]
     ), # Differential data
-    zero(space), # last_spike_time
+    zero(neuron, space), # last_spike_time
     neuron.dt_refractory,
     neuron.threshold
 )

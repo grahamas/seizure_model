@@ -1,6 +1,4 @@
 @with_kw struct HHNetwork{T} <: AbstractModel{T,D,2}
-    num_neurons::Int
-    proportion_E::Float64
     space::AbstractSpace{T,D}
     stimulus::AbstractArray{<:AbstractStimulus{T}}
     synapse_AMPA::AMPASynapse{T}
@@ -29,7 +27,7 @@ end
 # State[1][8] is z_GABA
 # State[2] is neuronI
 # ..
-function make_system_mutator(network::HHNetwork)
+function Simulation73.make_system_mutator(network::HHNetwork)
     stimulus_mutator! = make_mutator(network.stimulus, network.space)
     synapse_AMPA_mutator! = make_mutator(network.synapse_AMPA)
     synapse_GABA_mutator! = make_mutator(network.synapse_GABA)

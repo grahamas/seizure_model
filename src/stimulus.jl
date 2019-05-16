@@ -48,8 +48,7 @@ function SharpBumpStimulus{T,N}(; strength::T=nothing, width::T=nothing,
 end
 
 function on_frame(sbs::SharpBumpStimulus{T,N}, space::AbstractSpace{T,N}) where {T,N}
-    pop = one_pop(space)
-    frame = zeros(T,size(pop)...)
+    frame = zero(space)
     half_width = sbs.width / 2.0
     frame[distance.(pop, Ref(sbs.center)) .<= half_width] .= sbs.strength
     return frame
