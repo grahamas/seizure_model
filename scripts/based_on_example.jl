@@ -1,7 +1,7 @@
 using DrWatson
 quickactivate(@__DIR__, "seizure_model")
 
-using Simulation73, TravelingWaveSimulations
+using Simulation73, seizure_model
 using BSON
 using Dates
 using ArgParse

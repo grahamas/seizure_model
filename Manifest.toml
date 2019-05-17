@@ -275,9 +275,9 @@ uuid = "8ba89e20-285c-5b6f-9357-94700520ee1b"
 
 [[Distributions]]
 deps = ["LinearAlgebra", "PDMats", "Printf", "QuadGK", "Random", "SpecialFunctions", "Statistics", "StatsBase", "StatsFuns"]
-git-tree-sha1 = "56a158bc0abe4af5d4027af2275fde484261ca6d"
+git-tree-sha1 = "4ae0ff1a3a556383f7b1b004f5fb964b26ac96c9"
 uuid = "31c24e10-a181-5473-b8eb-7969acd0382f"
-version = "0.19.2"
+version = "0.20.0"
 
 [[DocStringExtensions]]
 deps = ["LibGit2", "Markdown", "Pkg", "Test"]
@@ -361,10 +361,8 @@ uuid = "0862f596-cf2d-50af-8ef4-f2be67dfa83f"
 version = "0.2.1"
 
 [[HodgkinHuxleyModel]]
-deps = ["Parameters", "RecursiveArrayTools", "Simulation73"]
-git-tree-sha1 = "f6766402ae46786546ac8a2460d0f58d7555e30d"
-repo-rev = "master"
-repo-url = "../HodgkinHuxleyModel"
+deps = ["DifferentialEquations", "Parameters", "RecursiveArrayTools", "Simulation73"]
+path = "../HodgkinHuxleyModel"
 uuid = "e104df48-77ee-11e9-390e-8f7d660e0146"
 version = "0.1.0"
 
@@ -579,9 +577,9 @@ version = "0.9.7"
 
 [[Parameters]]
 deps = ["Markdown", "OrderedCollections", "REPL", "Test"]
-git-tree-sha1 = "70bdbfb2bceabb15345c0b54be4544813b3444e4"
+path = "/home/grahams/.julia/dev/Parameters"
 uuid = "d96e819e-fc66-5662-9728-84c9c7592b0a"
-version = "0.10.3"
+version = "0.10.3+"
 
 [[PenaltyFunctions]]
 deps = ["InteractiveUtils", "LearnBase", "LinearAlgebra", "RecipesBase", "Reexport", "Test"]
@@ -620,10 +618,10 @@ deps = ["Printf"]
 uuid = "9abbd945-dff8-562f-b5e8-e1ebf5ef1b79"
 
 [[QuadGK]]
-deps = ["DataStructures", "LinearAlgebra", "Test"]
-git-tree-sha1 = "3ce467a8e76c6030d4c3786e7d3a73442017cdc0"
+deps = ["DataStructures", "LinearAlgebra"]
+git-tree-sha1 = "389fd27b958a33df5234772cc464b663b208273d"
 uuid = "1fd47b50-473d-5c70-9696-f719f8f3bcdc"
-version = "2.0.3"
+version = "2.0.4"
 
 [[REPL]]
 deps = ["InteractiveUtils", "Markdown", "Sockets"]
@@ -802,9 +800,9 @@ version = "0.5.3"
 
 [[Tracker]]
 deps = ["Adapt", "DiffRules", "ForwardDiff", "LinearAlgebra", "MacroTools", "NNlib", "NaNMath", "Printf", "Random", "Requires", "SpecialFunctions", "Statistics", "Test"]
-git-tree-sha1 = "635c47e3afc470c5cc58021fe489d663ef3182ed"
+git-tree-sha1 = "327342fec6e09f68ced0c2dc5731ed475e4b696b"
 uuid = "9f7883ad-71c0-57eb-9f7f-b5c9e6d3789c"
-version = "0.2.1"
+version = "0.2.2"
 
 [[TranscodingStreams]]
 deps = ["Random", "Test"]
