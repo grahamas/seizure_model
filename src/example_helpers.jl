@@ -11,3 +11,7 @@ function kw_example(fn_expr)
   end
   MacroTools.combinedef(fn_dct)
 end
+
+macro kw_example(fn_expr)
+    fn_expr |> kw_example |> esc
+end

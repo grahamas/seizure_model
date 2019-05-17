@@ -1,6 +1,6 @@
 @kw_example function tuan()
     simulation = Simulation(;
-      model = HHNetwork(
+      model = HHNetwork(;
         space = Grid(extent=(300.0,300.0), n_points=(20,20)), #FIXME extent is a guess
         stimulus = RampingBumpStimulus(
           strength=700.0,
