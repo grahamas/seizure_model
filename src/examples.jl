@@ -1,3 +1,5 @@
+include("example_helpers.jl")
+
 function get_example(example_name)
     examples = Dict(
                     "tuan" => tuan
