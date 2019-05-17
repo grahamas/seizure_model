@@ -1,0 +1,70 @@
+@kw_example function tuan()
+    simulation = Simulation(;
+      model = HHNetwork(
+        space = Grid(extent=(300.0,300.0), n_points=(20,20)), #FIXME extent is a guess
+        stimulus = RampingBumpStimulus(
+          strength=700.0,
+          peak_time=(3/5)*stop_time,
+          width=ceil.(Int, sqrt(0.05) .* n_points)
+        ),
+        synapses = AMPAandGABASynapses(;
+          E = [0.0 -80.0;
+               0.0 -80.0],
+          τ = [3.0 10.0;
+               3.0 10.0],
+          delay = [2.0 5.0;
+                   2.0 5.0],
+          connectivity = pops(DecayingExponentialConnectivity;
+              amplitude = [10.0 -3.0;
+                           10.0 -0.5],
+              spread = [30.0 40.0;
+                        30.0 40.0]
+                      ) # Note that this should, perhaps be truncated
+        ),
+        neuron_E = HHNeuron(;
+          C = 1.0,
+          E_K = -90.0,
+          E_L = -80.0,
+          E_Na = 60.0,
+          SA = 9.0,
+          V_m_half = -20.0,
+          V_n_half = -25.0,
+          g_K = 10.0,
+          g_L = 8.0,
+          g_Na = 20.0,
+          k_m = 15.0,
+          k_n = 5.0,
+          τ_n = 1.0,
+          τ_V_f = 1/(2*pi*0.2),
+          τ_V_s = 1/(2*pi*0.01),
+          dt_refractory = dt,
+          threshold = 20.0,
+          N_per_point=4
+        ),
+        neuron_I = HHNeuron(;
+          C = 1.0,
+          E_K = -90.0,
+          E_L = -78.0,
+          E_Na = 60.0,
+          SA = 1.0,
+          V_m_half = -20.0,
+          V_n_half = -45.0,
+          g_K = 10.0,
+          g_L = 8.0,
+          g_Na = 20.0,
+          k_m = 15.0,
+          k_n = 5.0,
+          τ_n = 1.0,
+          τ_V_f = 1/(2*pi*0.2),
+          τ_V_s = 1/(2*pi*0.01),
+          dt_refractory = dt,
+          threshold = 20.0,
+          N_per_point=4
+        )
+      ),
+      solver = Solver{Float64}(;
+        stop_time = 20e2, #ms
+        dt = 1/10 #ms
+      )
+    )
+end
