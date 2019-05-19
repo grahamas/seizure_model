@@ -1,10 +1,10 @@
-@EI_kw_example function tuan()
+@EI_kw_example function tuan(; common_dt::Float64=1/10, common_stop_time::Float64=20e2)
     simulation = Simulation(;
       model = HHNetwork(;
         space = Grid(extent=(300.0,300.0), n_points=(20,20)), #FIXME extent is a guess
         stimulus = RampingBumpStimulus(
           strength=700.0,
-          peak_time=(3/5)*stop_time,
+          peak_time=(3/5)*common_stop_time,
           width=ceil.(Int, sqrt(0.05) .* n_points)
         ),
         synapses = AMPAandGABASynapses(;
@@ -37,14 +37,14 @@
           τ_n = [1.0, 1.0],
           τ_V_f = [1/(2*pi*0.2), 1/(2*pi*0.2)],
           τ_V_s = [1/(2*pi*0.01), 1/(2*pi*0.01)],
-          dt_refractory = [dt, dt],
+          dt_refractory = [common_dt, common_dt],
           threshold = [20.0, 20.0],
           N_per_point = [4, 1]
         )
       ),
       solver = Solver{Float64}(;
-        stop_time = 20e2, #ms
-        dt = 1/10 #ms
+        stop_time = common_stop_time, #ms
+        dt = common_dt #ms
       )
     )
 end

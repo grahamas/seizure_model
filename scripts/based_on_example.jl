@@ -18,6 +18,7 @@ arg_settings = ArgParseSettings()
         nargs = '*'
         help = "Name of file specifying dict of modifications"
     "--plotspec-case"
+        nargs = '*'
         help = "Name of file specifying plots"
     "--no-save-raw"
         help = "Don't save raw simulation"
@@ -93,6 +94,8 @@ if !args["no-save-raw"]
 end
 
 for modification in modifications
+    @show modification
+    @show get_example(example_name)
     simulation = get_example(example_name)(; modification...)
     execution = execute(simulation)
     mod_name = savename(modification; allowedtypes=(Real,String,Symbol,AbstractArray), connector=";")
